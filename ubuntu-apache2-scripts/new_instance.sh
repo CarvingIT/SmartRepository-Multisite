@@ -1,7 +1,9 @@
 #!/bin/bash
 
-if [ "$#" != "1" ]; then
-    echo "You must provide the instance identifier as an argument."
+if [ "$#" != "2" ]; then
+    echo "You must provide two arguments - instance-identifier and email-address of the administator."
+	echo "Sample usage - $ sudo new_instance.sh mycompanyname myemail@mydomain.com"
+	exit
 else
     echo "Creating a new instance."
 fi
@@ -88,3 +90,6 @@ cd /var/www/html/smart-repository
 echo "Creating schema and seeding the new DB"
 source $VHOST_ENV
 php artisan migrate:fresh --seed
+
+## create an administrator
+php artisan SR:MakeAdmin $2
